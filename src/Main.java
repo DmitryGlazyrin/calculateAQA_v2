@@ -4,24 +4,24 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        calculate();
+        System.out.print("Input: ");
+        Scanner scan = new Scanner(System.in);
+        String strExpression = scan.nextLine();
+        calculate(strExpression);
+        String resultStr = calculate(strExpression);
+        System.out.println(resultStr);
 
     }
-    static void calculate(){
-        Scanner scan = new Scanner(System.in);
+    static String calculate(String strExpression){
 
-        System.out.print("Input: ");
-
-        String strExpression = scan.nextLine();
         String [] strExpressionArr = strExpression.split(" ");
+        String exceptionVariable;
 
         try {
             short num1 = Short.parseShort(strExpressionArr[0]);
             short num2 = Short.parseShort(strExpressionArr[2]);
         } catch (NumberFormatException e){
-            System.out.println("Number is not natural");
-            scan.close();
-            return;
+           return exceptionVariable = "Number is not natural";
         }
 
         short num1 = Short.parseShort(strExpressionArr[0]);
@@ -33,38 +33,36 @@ public class Main {
             try {
                 throw new IllegalArgumentException();
             } catch (IllegalArgumentException e){
-                System.out.println("Number is incorrect");
-                scan.close();
-                return;
+               return exceptionVariable = "Number is incorrect";
             }
         }
 
-        if((znak != '+' && znak !='-' && znak != '*' && znak != '/') || (strExpression.length()>7)){
+        if(!(znak == '+' && znak == '-' && znak == '/' && znak == '*') || (strExpression.length()>7)){
             try {
                 throw new IOException();
             } catch (IOException e){
-                System.out.println("This expression is not mathematical and does not support");
-                scan.close();
-                return;
+                return exceptionVariable = "This expression is not mathematical and does not support";
             }
         }
-
+        String output = " ";
         switch (znak){
             case '+':
                 result = (short) (num1+num2);
-                break;
+                output = String.valueOf(result);
+                return output;
             case '-':
                 result = (short) (num1-num2);
-                break;
+                output = String.valueOf(result);
+                return output;
             case '*':
                 result = (short) (num1*num2);
-                break;
+                output = String.valueOf(result);
+                return output;
             case '/':
                 result = (short) (num1/num2);
-                break;
+                output = String.valueOf(result);
+                return output;
         }
-
-        System.out.println("Output: "+result);
-        scan.close();
+        return output;
     }
 }
